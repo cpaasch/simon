@@ -6,9 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-#define NUM_POINTS 62
+#define NUM_POINTS 12
 #define TABLE_WIDTH 300
 #define GRAPH_MIN_HEIGHT 100
 #define GRAPH_MIN_WIDTH 350
@@ -69,7 +67,7 @@ typedef struct {
 		guint64 last_in, last_out;
 		GTimeVal time;
 		unsigned int max;
-		unsigned values[62];
+		unsigned values[NUM_POINTS];
 		size_t cur;
 		char ifname[MAX_IF_NAMELEN];
 		int status;

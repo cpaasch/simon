@@ -19,8 +19,6 @@ static void destroy( GtkWidget *widget,
   gtk_main_quit ();
 }
 
-
-
 static GtkWidget *start_window(Interface_list *interfaces) {
 
   GtkWidget *window;

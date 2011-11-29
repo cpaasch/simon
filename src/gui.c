@@ -1,16 +1,12 @@
 #include "gui.h"
 
-
 static void close_simon( GtkWidget *widget,
                    gpointer   data )
 {
 	Drawable *graph = (Drawable *) data;
 
 	graph->stop = 1;
-
 }
-
-
 
 /*
  * This method initializes a Drawable structure. The drawable structure is
@@ -22,8 +18,8 @@ static void close_simon( GtkWidget *widget,
  * dispname: the name of the interface to display next to the graph.
  */
 
-void drawableInit(Drawable *graph, char *ifname, char *dispname) {
-
+void drawableInit(Drawable *graph, char *ifname, char *dispname)
+{
 	int i;
 
 	graph->gc = NULL;
@@ -90,7 +86,6 @@ void drawableInit(Drawable *graph, char *ifname, char *dispname) {
 	/* Showing all */
 
 	gtk_widget_show(graph->drawing_area);
-
 }
 
 /*
@@ -230,7 +225,7 @@ gboolean load_graph_expose(GtkWidget *widget, GdkEventExpose *event,
 
 	/* Number of pixels wide for one graph point */
 	sample_width = (float) (g->draw_width - RMARGIN - INDENT)
-			/ (float) 62;
+			/ (float) NUM_POINTS;
 	/* General offset */
 	x_offset = g->draw_width - RMARGIN + (sample_width * 2);
 
@@ -259,7 +254,7 @@ gboolean load_graph_expose(GtkWidget *widget, GdkEventExpose *event,
 		else
 			gdk_cairo_set_source_color(cr, &(g->net_out_color));
 
-		for (i = 1; i < 62; ++i) {
+		for (i = 1; i < NUM_POINTS; ++i) {
 
 			if (g->data[i][j] == -1.0f)
 				continue;
@@ -301,14 +296,11 @@ load_graph_update (gpointer user_data)
 {
 	Drawable * const g = (Drawable *)user_data;
 
-
 	/* Stop flag set > The widget will be destroyed ad the timer canceled */
 	if(g->stop == 1) {
 		gtk_widget_destroy(g->mainvbox);
 		return FALSE;
 	}
-
-
 
 	if (g->render_counter == FRAMES_PER_UNIT - 1) {
 		int i;
@@ -318,7 +310,6 @@ load_graph_update (gpointer user_data)
 		}
 
 		update_net(g);
-
 	}
 
 	load_graph_draw(g);
@@ -327,8 +318,6 @@ load_graph_update (gpointer user_data)
 
 	if (g->render_counter >= FRAMES_PER_UNIT)
 		g->render_counter = 0;
-
-
 
 	return TRUE;
 }
@@ -372,8 +361,6 @@ load_graph_configure (GtkWidget *widget,
  */
 
 GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
-
-
 	//GtkWidget *button;
 	GtkWidget *table;
 	GtkWidget *net_legend_box;
@@ -383,14 +370,8 @@ GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
 	char buf[100];
 	GdkColor color;
 
-
-
-
 	gtk_box_pack_start(GTK_BOX(graph->mainvbox), graph->hbox, TRUE, TRUE, 0);
-
 	gtk_widget_show(graph->hbox);
-
-
 
 	/* Net legend */
 	net_legend_box = gtk_hbox_new(FALSE, 10);
@@ -430,8 +411,6 @@ GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
 	gtk_misc_set_alignment (GTK_MISC (graph->labels.net_in),
 				1.0,
 				0.5);
-
-
 
 	gtk_widget_set_size_request(GTK_WIDGET(graph->labels.net_in), 65, -1);
 	gtk_table_attach (GTK_TABLE (table), graph->labels.net_in, 2, 3, 0, 1,

@@ -25,7 +25,7 @@ void net_scale(Drawable *g, unsigned din, unsigned dout) {
 
 	unsigned dmax = MAX(din, dout);
 	g->net.values[g->net.cur] = dmax;
-	g->net.cur = (g->net.cur + 1) % 62;
+	g->net.cur = (g->net.cur + 1) % NUM_POINTS;
 
 	unsigned new_max;
 	// both way, new_max is the greatest value
@@ -34,7 +34,7 @@ void net_scale(Drawable *g, unsigned din, unsigned dout) {
 	else {
 		int maxtemp = 0;
 		int i = 0;
-		for (i = 0; i < 62; i++)
+		for (i = 0; i < NUM_POINTS; i++)
 			if (g->net.values[i] > maxtemp)
 				maxtemp = g->net.values[i];
 		new_max = maxtemp;
@@ -104,7 +104,7 @@ void net_scale(Drawable *g, unsigned din, unsigned dout) {
 
 	const float scale = 1.0f * g->net.max / new_max;
 
-	for (i = 0; i < 62; i++) {
+	for (i = 0; i < NUM_POINTS; i++) {
 		if (g->data[i][0] >= 0.0f) {
 			g->data[i][0] *= scale;
 			g->data[i][1] *= scale;
@@ -317,24 +317,18 @@ void update_net(Drawable *g) {
 		}
 
 #ifndef ALL_TRAFFIC
-	if(strlen(g->net.ifname) == 0) {
+		if(strlen(g->net.ifname) == 0) {
 #endif
-		in += netload.bytes_in;
-		out += netload.bytes_out;
+			in += netload.bytes_in;
+			out += netload.bytes_out;
 #ifndef ALL_TRAFFIC
-	}
+		}
 #endif
-
-
-
-
 	}
+
 	if (i == netlist.number) { // Radio disabled.
 		update_if_status(0, g);
 	}
-
-
-
 
 	g_strfreev(ifnames);
 

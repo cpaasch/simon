@@ -1,19 +1,10 @@
 #ifndef _GUI_H
 #define _GUI_H
 
-
-
 #include <gtk/gtk.h>
 #include <glibtop.h>
 #include "utils.h"
 #include "network.h"
-
-
-
-
-
-
-
 
 void drawableInit(Drawable *graph, char *ifname, char *dispname);
 void draw_backround(Drawable *graph);
