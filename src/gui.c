@@ -167,7 +167,7 @@ void draw_backround(Drawable *graph)
 
 	cairo_set_dash(cr, dash, 2, 1.5);
 
-	const unsigned total_seconds = SPEED * (NUM_POINTS - 2) / 1000;
+	const unsigned total_seconds = SPEED * (NUM_POINTS - 2) / SPEED;
 
 	for (i = 0; i < 7; i++) {
 		double x = (i) * (graph->draw_width - RMARGIN - INDENT) / 6;
@@ -521,6 +521,7 @@ GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
 	gtk_widget_set_events (graph->drawing_area, GDK_EXPOSURE_MASK);
 
 	load_graph_update(graph);
+	printf("Timeout: %d\n", SPEED / FRAMES_PER_UNIT);
 	graph->timer_index = g_timeout_add (SPEED / FRAMES_PER_UNIT,
 							load_graph_update,
 							graph);
