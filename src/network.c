@@ -222,7 +222,7 @@ Interface_list get_active_iflist() {
 	    if (netload.if_flags & (1 << GLIBTOP_IF_FLAGS_LOOPBACK))
         continue;
 
-      if (!(netload.flags & (1 << GLIBTOP_NETLOAD_ADDRESS6) && netload.scope6
+      if (!((netload.flags & (1 << GLIBTOP_NETLOAD_ADDRESS6)) && netload.scope6
         != GLIBTOP_IF_IN6_SCOPE_LINK) && !(netload.flags & (1
         << GLIBTOP_NETLOAD_ADDRESS)))
         continue;

@@ -333,13 +333,13 @@ load_graph_configure (GtkWidget *widget,
 		      GdkEventConfigure *event,
 		      gpointer data_ptr)
 {
-	Drawable * const g = (Drawable *)(data_ptr);
+/*	Drawable * const g = (Drawable *)(data_ptr);
 
 	//GtkAllocation allocation;
 	//gtk_widget_get_allocation (graph->hbox, &allocation);
 	//gtk_widget_set_size_request(GTK_WIDGET(graph->drawing_area), allocation.width - 20, -1);
 
-/*
+
 	g->draw_width = widget->allocation.width - 2 * FRAME_WIDTH;
 	g->draw_height = widget->allocation.height - 2 * FRAME_WIDTH;
 
@@ -366,7 +366,7 @@ GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
 	GtkWidget *net_legend_box;
 	GtkWidget *spacer, *label;
 	GtkWidget *closebutton;
-	GtkWidget *halign;
+	GtkAlignment *halign;
 	char buf[100];
 	GdkColor color;
 
@@ -375,8 +375,8 @@ GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
 
 	/* Net legend */
 	net_legend_box = gtk_hbox_new(FALSE, 10);
-	halign = gtk_alignment_new(0, 0, 0, 0);
-	gtk_alignment_set_padding           (halign,
+	halign = (GtkAlignment *)gtk_alignment_new(0, 0, 0, 0);
+	gtk_alignment_set_padding (halign,
 			 0,
 			 0,
 			 80,
@@ -384,7 +384,7 @@ GtkWidget *get_and_start_network_load_widget(Drawable *graph) {
 	gtk_container_add(GTK_CONTAINER(halign), net_legend_box);
 
 
-	gtk_box_pack_start (GTK_BOX (graph->mainvbox), halign,
+	gtk_box_pack_start (GTK_BOX (graph->mainvbox), (GtkWidget *)halign,
 				FALSE, FALSE, 0);
 
 	//spacer = gtk_label_new ("");
