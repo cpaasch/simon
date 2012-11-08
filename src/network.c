@@ -282,8 +282,10 @@ void update_net(Drawable *g) {
 		glibtop_netload netload;
 		glibtop_get_netload(&netload, ifnames[i]);
 
+#ifdef ALL_TRAFFIC
 		if (netload.if_flags & (1 << GLIBTOP_IF_FLAGS_LOOPBACK))
 			continue;
+#endif
 
 		/* Skip interfaces without any IPv4/IPv6 address (or
 		 those with only a LINK ipv6 addr) However we need to
