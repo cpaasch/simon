@@ -1,0 +1,8 @@
+.cproject
+.project
+build/
+.settings/
+cscope.out
+tags
+html/
+latex/
