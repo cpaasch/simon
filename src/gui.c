@@ -167,7 +167,7 @@ void draw_backround(Drawable *graph)
 
 	cairo_set_dash(cr, dash, 2, 1.5);
 
-	const unsigned total_seconds = SPEED * (NUM_POINTS - 2) / SPEED;
+	const unsigned total_seconds = SPEED * (NUM_POINTS - 2) / 1000;
 
 	for (i = 0; i < 7; i++) {
 		double x = (i) * (graph->draw_width - RMARGIN - INDENT) / 6;

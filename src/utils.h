@@ -15,7 +15,7 @@
 #define OUT_COLOR "#BE001A"
 
 #define FRAME_WIDTH 4
-#define FRAMES_PER_UNIT 1
+#define FRAMES_PER_UNIT 10
 #define FONTSIZE 10.0
 #define TABLE_FONT "Sans 10"
 #define RMARGIN 3.5 * FONTSIZE
