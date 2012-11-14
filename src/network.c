@@ -34,7 +34,7 @@ void net_scale(Drawable *g, unsigned din, unsigned dout) {
 	else {
 		int maxtemp = 0;
 		int i = 0;
-		for (i = 0; i < NUM_POINTS; i++)
+		for (i = (NUM_POINTS-1); i >= LAST_MAX_CALC_INDEX; i--)
 			if (g->net.values[i] > maxtemp)
 				maxtemp = g->net.values[i];
 		new_max = maxtemp;

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #define NUM_POINTS 22		// Number of points in the measurement table
+#define LAST_MAX_CALC_INDEX	 0	// Last index to use for max value calculation. Should be smaller than NUM_POINTS
 #define GRAPH_MIN_HEIGHT 100
 #define GRAPH_MIN_WIDTH 350
 #define LINE_WIDTH 1
