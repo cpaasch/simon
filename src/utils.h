@@ -6,22 +6,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUM_POINTS 12
-#define TABLE_WIDTH 300
+#define NUM_POINTS 22		// Number of points in the measurement table
 #define GRAPH_MIN_HEIGHT 100
 #define GRAPH_MIN_WIDTH 350
 #define LINE_WIDTH 1
 #define IN_COLOR "#2C42FF"
 #define OUT_COLOR "#BE001A"
 
-#define FRAME_WIDTH 4
-#define FRAMES_PER_UNIT 10
+#define FRAME_WIDTH 4		// Size of the frame around the drawing area
+#define FRAMES_PER_UNIT 5	// How many frames should be drawn between measurements
 #define FONTSIZE 10.0
 #define TABLE_FONT "Sans 10"
 #define RMARGIN 3.5 * FONTSIZE
 #define INDENT 32.0
 #define NUM_BARS 4
-#define SPEED 1000
+#define SPEED 500			// How often should we measure in milliseconds
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 500
 
@@ -54,7 +53,7 @@ typedef struct {
 
 	size_t cur;
 	gfloat *data[NUM_POINTS];
-	float data_block[124];
+	float data_block[NUM_POINTS*2];
 	guint graph_dely;
 	guint real_draw_height;
 	double graph_delx;
