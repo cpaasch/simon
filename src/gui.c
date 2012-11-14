@@ -111,8 +111,8 @@ void draw_backround(Drawable *graph)
 	/* Playing with cairo */
 	graph->draw_width = graph->drawing_area->allocation.width - 2 * FRAME_WIDTH;
 	graph->draw_height = graph->drawing_area->allocation.height - 2 * FRAME_WIDTH;
-	graph->graph_dely = (graph->draw_height - 15) / NUM_BARS; /* round to int to avoid AA blur */
-	graph->real_draw_height = graph->graph_dely * NUM_BARS;
+	graph->graph_dely = (graph->draw_height - 15) / NUM_BARS_Y; /* round to int to avoid AA blur */
+	graph->real_draw_height = graph->graph_dely * NUM_BARS_Y;
 	graph->graph_delx = (graph->draw_width - 2.0 - RMARGIN - INDENT) / (NUM_POINTS - 3);
 	graph->graph_buffer_offset = (int) (1.5 * graph->graph_delx) + FRAME_WIDTH;
 
@@ -140,19 +140,19 @@ void draw_backround(Drawable *graph)
 	cairo_set_dash (cr, dash, 2, 0);
 	cairo_set_font_size (cr, FONTSIZE);
 
-	for (i = 0; i <= NUM_BARS; ++i) {
+	for (i = 0; i <= NUM_BARS_Y; ++i) {
 		double y;
 
 		if (i == 0)
 			y = 0.5 + FONTSIZE / 2.0;
-		else if (i == NUM_BARS)
+		else if (i == NUM_BARS_Y)
 			y = i * graph->graph_dely + 0.5;
 		else
 			y = i * graph->graph_dely + FONTSIZE / 2.0;
 
 		gdk_cairo_set_source_color (cr, &style->fg[GTK_STATE_NORMAL]);
 		// operation orders matters so it's 0 if i == num_bars
-		unsigned rate = graph->net.max - (i * graph->net.max / NUM_BARS);
+		unsigned rate = graph->net.max - (i * graph->net.max / NUM_BARS_Y);
 		const char *caption = format_network_rate(rate, graph->net.max);
 		cairo_text_extents (cr, caption, &extents);
 		cairo_move_to (cr, INDENT - extents.width + 20, y);
@@ -169,14 +169,15 @@ void draw_backround(Drawable *graph)
 
 	const unsigned total_seconds = SPEED * (NUM_POINTS - 2) / 1000;
 
-	for (i = 0; i < 7; i++) {
-		double x = (i) * (graph->draw_width - RMARGIN - INDENT) / 6;
+	for (i = 0; i < NUM_BARS_X+2; i++) {
+		double x = (i) * (graph->draw_width - RMARGIN - INDENT) /
+				(NUM_BARS_X+1);
 		cairo_set_source_rgba(cr, 0, 0, 0, 0.75);
 		cairo_move_to(cr, (ceil(x) + 0.5) + RMARGIN + INDENT, 0.5);
 		cairo_line_to(cr, (ceil(x) + 0.5) + RMARGIN + INDENT,
 				graph->real_draw_height + 4.5);
 		cairo_stroke(cr);
-		unsigned seconds = total_seconds - i * total_seconds / 6;
+		unsigned seconds = total_seconds - i * total_seconds / (NUM_BARS_X+1);
 		const char* format;
 		//if (i == 0)
 		//	format = dngettext(GETTEXT_PACKAGE, "%u second", "%u seconds", seconds);

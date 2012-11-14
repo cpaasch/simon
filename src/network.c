@@ -83,9 +83,9 @@ void net_scale(Drawable *g, unsigned din, unsigned dout) {
 	coef10 = ceil(coef10 / (double) (factor10)) * factor10;
 
 	// then make coef10 divisible by num_bars
-	if (coef10 % NUM_BARS != 0)
-		coef10 = coef10 + (NUM_BARS - coef10 % NUM_BARS);
-	g_assert(coef10 % NUM_BARS == 0);
+	if (coef10 % NUM_BARS_Y != 0)
+		coef10 = coef10 + (NUM_BARS_Y - coef10 % NUM_BARS_Y);
+	g_assert(coef10 % NUM_BARS_Y == 0);
 
 	new_max = coef10 * (1UL << (base10 * 10));
 	//printf("bak %u new_max %u pow2 %u coef10 %u\n", bak_max, new_max, pow2,
@@ -96,7 +96,10 @@ void net_scale(Drawable *g, unsigned din, unsigned dout) {
 		printf("overflow detected: bak=%u new=%u\n", bak_max, new_max);
 		new_max = bak_max;
 	}
-
+//for (i = NUM_POINTS-1; i >= 0; i--) {
+//	printf("%.2f ", g->data[i][0]);
+//}
+//printf("\n");
 	// if max is the same or has decreased but not so much, don't
 	// do anything to avoid rescaling
 	if ((0.8 * g->net.max) < new_max && new_max <= g->net.max)

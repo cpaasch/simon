@@ -19,7 +19,8 @@
 #define TABLE_FONT "Sans 10"
 #define RMARGIN 3.5 * FONTSIZE
 #define INDENT 32.0
-#define NUM_BARS 4
+#define NUM_BARS_Y 4
+#define NUM_BARS_X 4
 #define SPEED 500			// How often should we measure in milliseconds
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 500
