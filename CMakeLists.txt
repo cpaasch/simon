@@ -30,4 +30,4 @@ include_directories (
 add_subdirectory(src)
 
 add_executable(simon ${simonSources} )
-target_link_libraries(simon  ${GTK2_LIBRARIES} ${GOBJECT_LIBRARIES} ${Libgtop2_LIBRARIES} )
+target_link_libraries(simon  ${GTK2_LIBRARIES} ${GOBJECT_LIBRARIES} ${Libgtop2_LIBRARIES} m)
